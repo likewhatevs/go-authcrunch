@@ -39,7 +39,6 @@ import (
 	"github.com/greenpau/go-authcrunch/pkg/identity/qr"
 	"github.com/greenpau/go-authcrunch/pkg/idp"
 	"github.com/greenpau/go-authcrunch/pkg/idp/oauth"
-	"github.com/greenpau/go-authcrunch/pkg/idp/saml"
 	"github.com/greenpau/go-authcrunch/pkg/ids"
 	"github.com/greenpau/go-authcrunch/pkg/ids/ldap"
 	"github.com/greenpau/go-authcrunch/pkg/ids/local"
@@ -687,11 +686,6 @@ func TestTagCompliance(t *testing.T) {
 			opts:  &Options{},
 		},
 		{
-			name:  "test saml.Backend struct",
-			entry: &saml.IdentityProvider{},
-			opts:  &Options{},
-		},
-		{
 			name:  "test transformer.Config struct",
 			entry: &transformer.Config{},
 			opts:  &Options{},
@@ -764,16 +758,6 @@ func TestTagCompliance(t *testing.T) {
 			name:  "test validator.TokenValidator struct",
 			entry: &validator.TokenValidator{},
 			opts:  &Options{},
-		},
-		{
-			name:  "test saml.Config struct",
-			entry: &saml.Config{},
-			opts: &Options{
-				AllowFieldMismatch: true,
-				AllowedFields: map[string]interface{}{
-					"acs_urls": true,
-				},
-			},
 		},
 		{
 			name:  "test ldap.AuthServer struct",

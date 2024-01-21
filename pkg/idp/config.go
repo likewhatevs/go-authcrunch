@@ -19,7 +19,6 @@ import (
 	"fmt"
 	"github.com/greenpau/go-authcrunch/pkg/errors"
 	"github.com/greenpau/go-authcrunch/pkg/idp/oauth"
-	"github.com/greenpau/go-authcrunch/pkg/idp/saml"
 )
 
 // IdentityProviderConfig represents an identity provider configuration.
@@ -131,13 +130,6 @@ func (cfg *IdentityProviderConfig) Validate() error {
 	switch cfg.Kind {
 	case "oauth":
 		config := &oauth.Config{}
-		json.Unmarshal(b, config)
-		config.Name = cfg.Name
-		if err := config.Validate(); err != nil {
-			return errors.ErrIdentityProviderConfigInvalid.WithArgs(err)
-		}
-	case "saml":
-		config := &saml.Config{}
 		json.Unmarshal(b, config)
 		config.Name = cfg.Name
 		if err := config.Validate(); err != nil {

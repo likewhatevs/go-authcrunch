@@ -21,7 +21,6 @@ import (
 	"github.com/greenpau/go-authcrunch/pkg/authn/icons"
 	"github.com/greenpau/go-authcrunch/pkg/errors"
 	"github.com/greenpau/go-authcrunch/pkg/idp/oauth"
-	"github.com/greenpau/go-authcrunch/pkg/idp/saml"
 	"github.com/greenpau/go-authcrunch/pkg/requests"
 	"go.uber.org/zap"
 )
@@ -64,13 +63,6 @@ func NewIdentityProvider(cfg *IdentityProviderConfig, logger *zap.Logger) (Ident
 		}
 		config.Name = cfg.Name
 		p, err = oauth.NewIdentityProvider(config, logger)
-	case "saml":
-		config := &saml.Config{}
-		if err := json.Unmarshal(b, config); err != nil {
-			return nil, errors.ErrIdentityProviderNewConfig.WithArgs(cfg.Params, err)
-		}
-		config.Name = cfg.Name
-		p, err = saml.NewIdentityProvider(config, logger)
 	}
 
 	if err != nil {

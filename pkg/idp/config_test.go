@@ -193,22 +193,6 @@ func TestNewIdentityProviderConfig(t *testing.T) {
 				errors.ErrIdentityProviderConfig.WithArgs("driver name not found"),
 			),
 		},
-		{
-			name:   "test saml config validation error",
-			driver: "jumpcloud",
-			kind:   "saml",
-			params: map[string]interface{}{
-				"driver":    "",
-				"realm":     "",
-				"entity_id": "",
-				"acs_urls":  "",
-			},
-
-			shouldErr: true,
-			err: errors.ErrIdentityProviderConfigInvalid.WithArgs(
-				errors.ErrIdentityProviderConfigureRealmEmpty,
-			),
-		},
 	}
 	for _, tc := range testcases {
 		t.Run(tc.name, func(t *testing.T) {
